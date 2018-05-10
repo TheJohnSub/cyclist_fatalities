@@ -1,0 +1,1 @@
+cd cyclist_fatalities/cyclist_fatalities && python twitter_scrub.py source_recognition/search_keywords.txt
