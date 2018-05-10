@@ -1,0 +1,28 @@
+cyclist kill
+bicyclist kill
+die bicyclist
+die cyclist
+bicyclist die
+cyclist die
+kill cyclist
+kill bicyclist
+bicyclist struck kill
+bicyclist hit and kill
+cyclist struck kill
+cyclist hit and kill
+bicyclist struck and kill
+bicyclist death
+cyclist death
+death of cyclist
+death of bicyclist
+kill -year-old bicyclist
+kill -year-old cyclist
+cyclist dead
+bicyclist dead
+kill in cycl
+bicyclist hit by[\s\S]*die
+cyclist hit by[\s\S]*die
+bicyclist [\s\S]* ha die
+cyclist[\s\S]*ha die
+kill[\s\S]*while ride bicycl
+kill[\s\S]*while ride bike
