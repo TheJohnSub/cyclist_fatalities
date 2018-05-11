@@ -1,8 +1,12 @@
 import peewee 
+import ConfigParser
 from peewee import *
 import datetime
 
-database = MySQLDatabase('cycle_incidents', user='data_capture', passwd='Johners1!')
+config_parse = ConfigParser.ConfigParser()
+config_parse.read('config.ini')
+
+database = MySQLDatabase(config_parse.get('keys', 'database_name'), user=config_parse.get('keys', 'database_user'), passwd=config_parse.get('keys', 'database_passwd'))
 database.connect()
 
 class BaseModel(Model):
