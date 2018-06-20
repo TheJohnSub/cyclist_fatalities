@@ -17,7 +17,7 @@ class BaseSource(BaseModel):
     URL = CharField(null = True)
     Name = CharField(null = True)
     Domain = CharField(null = True)
-    ArticleTitle = CharField(null = True)
+    ArticleTitle = TextField(null = True)
     ArticleText = TextField(null = True)
 
 class Incident(BaseModel):
@@ -56,8 +56,8 @@ class Scrub(BaseModel):
 class IncidentSourceCandidate(BaseSource):
 	Scrub = ForeignKeyField(Scrub, related_name='Candidates')
 	SearchFeedId = CharField(null = True)
-	SearchFeedURL = CharField(null = True)
-	SearchFeedText = CharField(null = True)
+	SearchFeedURL = TextField(null = True)
+	SearchFeedText = TextField(null = True)
 	SearchFeedJSON = TextField(null = True)
 	IsRelated = BooleanField(null = True, default = False)
 

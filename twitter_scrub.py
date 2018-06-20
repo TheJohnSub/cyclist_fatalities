@@ -49,7 +49,6 @@ def run_tweet_scrub(keywords):
         mysearchResp = ts.search_tweets(tso)
         contentOnly = mysearchResp['content']['statuses']
         filter_resp = [x for x in contentOnly if len(x['entities']['urls']) > 0 and contains_nonTwitter_domain(x['entities']['urls'])]
-        single_node = filter_resp[2]
         num_related = 0
         scrub.NumCandidates = len(filter_resp)
 
@@ -63,14 +62,17 @@ def run_tweet_scrub(keywords):
             article = g.extract(url=twit_url)
             try:
                 twit_id = candidate['id']
-                source_candidate = IncidentSourceCandidate(URL=twit_url, Domain=article.domain, ArticleText=article.cleaned_text.encode('utf8'), ArticleTitle=article.title.encode('utf8'), Scrub=scrub, SearchFeedId=twit_id, SearchFeedURL=get_tweet_url(candidate), SearchFeedText=candidate['text'].encode('utf8'))
-
+                source_candidate = IncidentSourceCandidate(URL=twit_url, Domain=article.domain, ArticleText=article.cleaned_text, ArticleTitle=article.title, Scrub=scrub, SearchFeedId=twit_id, SearchFeedURL=get_tweet_url(candidate), SearchFeedText=candidate['text'].encode('utf8'))
+                source_candidate.ArticleTitle.replace("'","'")
+                source_candidate.ArticleText.replace("'","'")
                 source_candidate.SearchFeedJSON = candidate
                 if (article.opengraph is not None) and ('site_name' in article.opengraph):
                     source_candidate.Name = article.opengraph['site_name']
                 if source_is_related(source_candidate):
                     source_candidate.IsRelated = True
                     num_related += 1
+                source_candidate.ArticleTitle.encode('ascii', 'ignore')
+                source_candidate.ArticleText.encode('ascii', 'ignore')
                 source_candidate.save()
                 print(source_candidate.SearchFeedText)
             except Exception as e:

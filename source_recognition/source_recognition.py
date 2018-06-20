@@ -64,6 +64,8 @@ def title_contains_related_phrase(source):
 	source_text = ''.join([i for i in source_text if not i.isdigit()])
 	try:
 		return is_phrase_in_text("source_recognition/title_phrases.txt", source_text)
-	except:
+	except Exception as e:
 		print 'An Exception: ', source.ArticleTitle
+		print e
+
 	return False
